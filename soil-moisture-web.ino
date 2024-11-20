@@ -6,6 +6,9 @@
 const char* ssid = "YourWiFiSSID"; // Replace with your WiFi network name
 const char* password = "YourWiFiPassword"; // Replace with your WiFi password
 
+const int dryValue = 4095; // Replace with your calibrated dry soil reading
+const int wetValue = 0;    // Replace with your calibrated wet soil reading
+
 WebServer server(80); // Web server instance
 
 // Define the GPIO pin for the sensor
@@ -56,7 +59,7 @@ void loop() {
 
   // Read and display the sensor value
   int sensorValue = analogRead(sensorPin); // Read analog value from sensor
-  int moisturePercentage = map(sensorValue, 4095, 0, 0, 100); // Convert to percentage
+  int moisturePercentage = map(sensorValue, dryValue, wetValue, 0, 100); // Convert to percentage
 
   // Display the sensor value on the screen
   tft.fillRect(0, 70, 240, 30, TFT_BLACK); // Clear the previous value
